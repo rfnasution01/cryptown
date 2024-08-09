@@ -13,6 +13,7 @@ export function DialogConfirm({
   classNamesTitle,
   title,
   content,
+  buttonGroup,
 }: {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
@@ -22,6 +23,7 @@ export function DialogConfirm({
   classNames?: string
   title?: string | ReactNode
   content?: ReactNode
+  buttonGroup?: ReactNode
 }) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -30,6 +32,7 @@ export function DialogConfirm({
         position="middle"
         style={{
           width: width ? width : isMobile ? '90%' : '30%',
+          minWidth: '30vw',
           maxHeight: '80vh',
         }}
       >
@@ -42,8 +45,11 @@ export function DialogConfirm({
               <span className="sr-only">Close</span>
             </DialogPrimitive.Close>
           </DialogHeader>
-          <div className="scrollbar flex h-full w-full flex-1 overflow-y-auto">
-            {content}
+          <div className="scrollbar pw-full flex h-full flex-1 flex-col gap-32 overflow-y-auto">
+            <div className="scrollbar flex h-full flex-1 overflow-y-auto">
+              {content}
+            </div>
+            <div className="flex">{buttonGroup}</div>
           </div>
         </div>
       </DialogContent>

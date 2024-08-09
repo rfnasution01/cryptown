@@ -174,6 +174,7 @@ export default {
           'dark-grey': '#333333',
           'deep-indigo': '#1A237E',
           'dark-blue': '#123456',
+          grey: '#D1D8E0',
         },
         dark: '#222222',
         light: '#F5F5F5',

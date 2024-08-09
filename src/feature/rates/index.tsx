@@ -1,39 +1,33 @@
 import { Loading } from '@/components/loading'
-import { useRates } from './hooks/useRates'
 import { ResRatesType } from '@/store/slice/rates/ratesType'
 import { convertToTitleCase } from '@/utils/formatText'
 import { Gem } from 'lucide-react'
 import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
-import { setStateRates } from '@/store/reducer/setRates'
+import { setStateRates, StateRatesType } from '@/store/reducer/setRates'
 
-export function MappingCurrency() {
-  const dispatch = useDispatch()
-
-  const { rates, loading, setStateRates: setRates, stateRates } = useRates()
-
-  const transformDataByType = (data: ResRatesType[]) => {
-    return data?.reduce(
-      (acc, item) => {
-        // Jika belum ada grup dengan tipe ini, buat grup baru
-        if (!acc[item?.type]) {
-          acc[item?.type] = []
-        }
-        // Tambahkan item ke grup berdasarkan tipe
-        acc[item?.type]?.push(item)
-        return acc
-      },
-      {} as { [key: string]: ResRatesType[] },
-    )
+export function MappingCurrency({
+  loading,
+  filteredRates,
+  groupedRates,
+  setRates,
+  stateRates,
+}: {
+  loading: boolean
+  filteredRates: ResRatesType[]
+  groupedRates: {
+    [key: string]: ResRatesType[]
   }
-
-  const groupedRates = transformDataByType(rates)
+  setRates: React.Dispatch<React.SetStateAction<StateRatesType>>
+  stateRates: StateRatesType
+}) {
+  const dispatch = useDispatch()
 
   return (
     <div className="scrollbar flex h-full w-full flex-1 flex-col gap-48 overflow-y-auto">
       {loading ? (
         <Loading />
-      ) : rates?.length > 0 ? (
+      ) : filteredRates.length > 0 ? (
         Object.keys(groupedRates)?.map((type) => (
           <div key={type} className="flex flex-col gap-24">
             <h3 className="text-[2rem] font-semibold">{type?.toUpperCase()}</h3>
@@ -51,14 +45,13 @@ export function MappingCurrency() {
                     }
                     setRates(rates)
                     dispatch(setStateRates(rates))
-                    localStorage.setItem('savingRates', JSON.stringify(rates))
                   }}
                   className={clsx(
                     'flex items-center gap-24 rounded-2x border p-24 hover:cursor-pointer',
                     {
                       'border-cryptown-deep-blue bg-cryptown-deep-blue':
                         stateRates?.id === item?.id,
-                      'border-cryptown-light hover:border-cryptown-deep-blue bg-white':
+                      'border-cryptown-light bg-white hover:border-cryptown-deep-blue':
                         stateRates?.id !== item?.id,
                     },
                   )}
@@ -67,9 +60,9 @@ export function MappingCurrency() {
                     className={clsx(
                       'flex h-[6rem] w-[6rem] items-center justify-center gap-12 rounded-full',
                       {
-                        'text-cryptown-deep-blue bg-white':
+                        'bg-white text-cryptown-deep-blue':
                           stateRates?.id === item?.id,
-                        'bg-cryptown-deep-blue text-cryptown-light-gray':
+                        'bg-cryptown-deep-blue text-cryptown-white':
                           stateRates?.id !== item?.id,
                       },
                     )}
@@ -113,7 +106,9 @@ export function MappingCurrency() {
           </div>
         ))
       ) : (
-        <p>No data.</p>
+        <p className="w-[30vw] border-l-2 border-cryptown-dark-grey bg-cryptown-deep-blue bg-opacity-10 px-24 py-12">
+          No data.
+        </p>
       )}
     </div>
   )
