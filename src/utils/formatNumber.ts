@@ -5,7 +5,13 @@ export function formatNumberValue(value: number) {
     return value?.toFixed(6)
   } else if (value < 1000) {
     return value?.toFixed(4)
+  } else if (value >= 1000 && value < 1_000_000) {
+    return (value / 1_000).toFixed(2) + 'K'
+  } else if (value >= 1_000_000 && value < 1_000_000_000) {
+    return (value / 1_000_000).toFixed(2) + 'M'
+  } else if (value >= 1_000_000_000 && value < 1_000_000_000_000) {
+    return (value / 1_000_000_000).toFixed(2) + 'B'
   } else {
-    return value?.toFixed(2)
+    return (value / 1_000_000_000_000).toFixed(2) + 'T'
   }
 }

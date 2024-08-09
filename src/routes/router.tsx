@@ -3,6 +3,7 @@ import {
   AssetsPage,
   ComingSoonPage,
   DashboardPage,
+  ExchangesPage,
   MainLayout,
   MarketsPage,
 } from './loadables'
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: 'assets',
         element: <AssetsPage />,
+      },
+      {
+        path: 'exchanges',
+        element: <ExchangesPage />,
       },
       {
         path: 'markets',

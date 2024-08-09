@@ -1,4 +1,5 @@
 export type ResExchangesType = {
+  id: string
   exchangeId: string
   name: string
   rank: string

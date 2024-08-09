@@ -1,4 +1,9 @@
-import { CircleGauge, LayoutDashboard, ShoppingBag } from 'lucide-react'
+import {
+  CircleGauge,
+  LayoutDashboard,
+  ShoppingBag,
+  ShoppingCart,
+} from 'lucide-react'
 
 export type MenuNavigationType = {
   name: string
@@ -13,6 +18,10 @@ export const MenuNavigation: MenuNavigationType[] = [
   {
     name: 'Assets',
     icon: <LayoutDashboard size={16} />,
+  },
+  {
+    name: 'Exchanges',
+    icon: <ShoppingCart size={16} />,
   },
   {
     name: 'Markets',
