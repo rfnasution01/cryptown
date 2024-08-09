@@ -89,3 +89,10 @@ export const getDayName = (dayIndex) => {
   const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']
   return days[dayIndex]
 }
+
+export function convertToTitleCase(text) {
+  return text
+    .split('-') // Memisahkan teks menjadi array berdasarkan tanda hubung
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Membuat huruf pertama setiap kata menjadi kapital
+    .join(' ') // Menggabungkan kembali array menjadi string dengan spasi sebagai pemisah
+}

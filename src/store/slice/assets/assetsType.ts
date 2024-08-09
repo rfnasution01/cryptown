@@ -16,8 +16,8 @@ export type ResAssetsType = {
 export type ParamsAssetsType = {
   search?: string
   ids?: string
-  limit?: string
-  offset?: string
+  limit?: number
+  offset?: number
 }
 
 export type ParamsAssetsDetailType = {

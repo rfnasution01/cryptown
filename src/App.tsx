@@ -1,16 +1,18 @@
 import { Seo } from './components/seo'
 import { AsideLayout } from './feature/layout/asideLayout'
+import { HeaderLayout } from './feature/layout'
+import { Outlet } from 'react-router-dom'
 
 export default function MainLayout() {
   return (
     <Seo>
-      <div className="flex h-full">
+      <div className="flex h-full w-full">
         <AsideLayout />
-        <div className="scrollbar flex h-full overflow-y-auto p-32">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-          explicabo ipsa perspiciatis numquam quo quos asperiores fuga dolorem
-          sit odit mollitia corrupti, dignissimos iusto tenetur natus optio.
-          Sit, nemo tempore?
+        <div className="scrollbar flex h-full w-full flex-col overflow-y-auto">
+          <HeaderLayout />
+          <div className="scrollbar h-full flex-1 overflow-y-auto">
+            <Outlet />
+          </div>
         </div>
       </div>
     </Seo>

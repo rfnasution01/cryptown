@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { api } from './api'
+import stateRates from './reducer/setRates'
 
 export const store = configureStore({
   reducer: {
+    stateRates: stateRates,
     [api.reducerPath]: api.reducer,
   },
   devTools: true,
