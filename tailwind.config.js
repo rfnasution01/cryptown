@@ -164,6 +164,14 @@ export default {
           divider: '#EBEBEB',
           outline: '#D9D9D9',
         },
+        cryptown: {
+          'deep-blue': '#0B3D91',
+          white: '#FFFFFF',
+          'golder-yellow': '#FFD700',
+          'light-gray': '#B0B0B0',
+          'deep-indigo': '#1A237E',
+          'dark-blue': '#123456',
+        },
         dark: '#222222',
         light: '#F5F5F5',
         destructive: {

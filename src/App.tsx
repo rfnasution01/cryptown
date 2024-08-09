@@ -1,55 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { Seo } from './components/seo'
+import { AsideLayout } from './feature/layout/asideLayout'
 
-interface Prices {
-  [key: string]: string
-}
-
-const App: React.FC = () => {
-  const [prices, setPrices] = useState<Prices>({})
-
-  useEffect(() => {
-    const ws = new WebSocket(
-      'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,monero,litecoin',
-    )
-
-    ws.onopen = () => {
-      console.log('WebSocket connection opened')
-    }
-
-    ws.onmessage = (msg) => {
-      const newPrices: Prices = JSON.parse(msg.data)
-      setPrices((prevPrices) => ({ ...prevPrices, ...newPrices }))
-    }
-
-    ws.onclose = () => {
-      console.log('WebSocket connection closed')
-    }
-
-    ws.onerror = (error) => {
-      console.error('WebSocket error:', error)
-    }
-
-    // Cleanup function to close the WebSocket connection when the component unmounts
-    return () => {
-      ws.close()
-    }
-  }, [])
-
+export default function MainLayout() {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl mb-4 font-bold">Current Prices</h1>
-      <ul className="space-y-2">
-        {Object.keys(prices).map((key) => (
-          <li key={key} className="rounded border p-2 shadow-sm">
-            <div>
-              <strong>{key.toUpperCase()}:</strong> $
-              {parseFloat(prices[key]).toFixed(2)}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Seo>
+      <div className="flex h-full">
+        <AsideLayout />
+        <div className="scrollbar flex h-full overflow-y-auto p-32">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
+          explicabo ipsa perspiciatis numquam quo quos asperiores fuga dolorem
+          sit odit mollitia corrupti, dignissimos iusto tenetur natus optio.
+          Sit, nemo tempore?
+        </div>
+      </div>
+    </Seo>
   )
 }
-
-export default App
