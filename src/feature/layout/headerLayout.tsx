@@ -5,8 +5,13 @@ import { MappingCurrency } from '../rates'
 import { useRates } from '../rates/hooks/useRates'
 import { ResRatesType } from '@/store/slice/rates/ratesType'
 import { Searching } from '@/components/searching'
+import { usePathname } from '@/hooks/usePathname'
+import { Typography } from '@/components/typography'
+import { convertSlugToText } from '@/utils/formatText'
 
 export function HeaderLayout() {
+  const { firstPathname } = usePathname()
+
   const { rates, loading, setStateRates: setRates, stateRates } = useRates()
 
   const [isShow, setIsShow] = useState<boolean>(false)
@@ -35,7 +40,15 @@ export function HeaderLayout() {
   const groupedRates = transformDataByType(filteredRates)
 
   return (
-    <div className="flex items-center justify-end gap-32 px-32 py-12">
+    <div className="flex items-center justify-between gap-32 px-32 py-12">
+      <Typography
+        size="md"
+        title={
+          firstPathname === '' ? 'Dashboard' : convertSlugToText(firstPathname)
+        }
+        className="text-nowrap font-roboto"
+      />
+
       <button
         onClick={() => setIsShow(true)}
         className="flex items-center gap-12 rounded-2x border border-cryptown-light bg-cryptown-light-gray-secondary px-24 py-12 text-cryptown-dark-grey hover:bg-opacity-80"
