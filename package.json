@@ -12,7 +12,9 @@
   "dependencies": {
     "@loadable/component": "^5.16.4",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-menubar": "^1.1.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.426.0",

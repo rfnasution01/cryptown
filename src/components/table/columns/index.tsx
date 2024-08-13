@@ -3,6 +3,9 @@ import { Column } from '..'
 import { ResExchangesType } from '@/store/slice/exchanges/exchangesType'
 import clsx from 'clsx'
 import { PriceLabel } from '@/components/price/priceLabel'
+import { CircleAlert } from 'lucide-react'
+import { MenubarInfo } from '@/components/menubars/menubarInfo'
+import { formatTimeAgo } from '@/utils/formatTime'
 
 export const columnsListAssets: Column<ResAssetsType>[] = [
   {
@@ -78,5 +81,31 @@ export const columnsListExchanges: Column<ResExchangesType>[] = [
     header: 'Trading Pairs',
     key: 'tradingPairs',
     width: '!min-w-[12rem]',
+  },
+  {
+    header: 'Status',
+    key: 'updated',
+    width: '!min-w-[12rem]',
+    renderCell(rowData) {
+      const now = Date.now()
+      const secondsPast = (now - Number(rowData?.updated)) / 1000
+
+      return (
+        <MenubarInfo
+          trigger={
+            <span
+              className={`${secondsPast < 86400 ? 'text-green-500' : secondsPast < 31622400 ? 'text-blue-300' : 'text-red-500'}`}
+            >
+              <CircleAlert size={16} />
+            </span>
+          }
+          content={
+            <div className="">
+              Updated {formatTimeAgo(Number(rowData?.updated))}
+            </div>
+          }
+        />
+      )
+    },
   },
 ]
