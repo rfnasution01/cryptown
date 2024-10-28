@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Book Opening Animation - Interactive 3D Page Flip Effect with HTML & CSS
+    </title>
+    <style>
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body Styling */
+      body,
+      html {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f0f0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Book Container */
+      .book {
+        position: relative;
+        width: 200px;
+        height: 300px;
+        perspective: 1000px;
+      }
+
+      /* Book Cover */
+      .cover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, #3d5a80, #293241);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        backface-visibility: hidden;
+        transform-origin: left;
+        transform: rotateY(0deg);
+        transition: transform 1s ease;
+      }
+
+      /* Inside Book (Pages) */
+      .pages {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform-origin: left;
+        transform-style: preserve-3d;
+        transform: rotateY(0deg);
+        transition: transform 1s ease;
+      }
+
+      /* Individual Pages */
+      .page {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: white;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        transform-origin: left;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        transition: transform 0.5s ease;
+      }
+
+      .page:nth-child(1) {
+        transform: rotateY(10deg);
+        z-index: 3;
+      }
+      .page:nth-child(2) {
+        transform: rotateY(20deg);
+        z-index: 2;
+      }
+      .page:nth-child(3) {
+        transform: rotateY(30deg);
+        z-index: 1;
+      }
+
+      /* Hover effect to open the book */
+      .book:hover .cover {
+        transform: rotateY(-140deg);
+      }
+
+      .book:hover .pages {
+        transform: rotateY(-140deg);
+      }
+
+      .book:hover .page:nth-child(1) {
+        transform: rotateY(0deg);
+      }
+
+      .book:hover .page:nth-child(2) {
+        transform: rotateY(10deg);
+      }
+
+      .book:hover .page:nth-child(3) {
+        transform: rotateY(20deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="book">
+      <!-- Cover -->
+      <div class="cover">Buku</div>
+
+      <!-- Pages -->
+      <div class="pages">
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+      </div>
+    </div>
+  </body>
+</html>
